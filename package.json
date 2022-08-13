@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "cypress": "cypress open",
-    "test":"cypress run"
+    "test": "cypress run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^9.7.0",
-    "cypress-xpath": "^2.0.1"
+    "cypress-xpath": "^2.0.1",
+    "jabber": "^1.4.0"
   }
 }

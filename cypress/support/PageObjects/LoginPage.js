@@ -11,5 +11,9 @@ class LoginPage {
         return cy.xpath("//button[@data-qa-id='btn-save']");
     }
 
+    getValidationText() {
+        return cy.xpath("//div[@data-qa-id='main-section']/descendant::span");
+    }
+
 }
 export default LoginPage;

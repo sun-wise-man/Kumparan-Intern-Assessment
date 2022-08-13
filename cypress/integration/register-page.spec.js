@@ -14,6 +14,7 @@ function openRegisterPage() {
 
 describe('Sign-in', () =>{
     const jabber = new Jabber();
+
     var randEmail = jabber.createEmail('example.com');
 
     context('ABLE to sign-in using unregistered email', () => {
@@ -65,11 +66,13 @@ describe('Sign-in', () =>{
                 .should('have.css', 'cursor', 'pointer')
                 .click({force: true});
 
-            cy.wait('@postRegister').its('response').then((response) => {
-                const { statusCode, body }= response;
-                expect(statusCode).to.eq(409);
-                expect(body.message).to.eq("Email sudah terdaftar");
-            })
+            cy.wait('@postRegister')
+                .its('response')
+                .then((response) => {
+                    const {statusCode, body} = response;
+                    expect(statusCode).to.eq(409);
+                    expect(body.message).to.eq("Email sudah terdaftar");
+                })
         })
 
         it('should show validation error text',() => {
@@ -122,7 +125,8 @@ describe('Sign-in', () =>{
 
         it('should show validation error text',() => {
             registerPage.getValidationText()
-                .should('contain','Tidak boleh kosong');
+                .filter(':contains("Tidak boleh kosong")')
+                .should('have.length',1);
         })
     })
 })

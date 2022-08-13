@@ -106,7 +106,7 @@ describe('Sign-in', () =>{
         })
     })
 
-    context.only('UNABLE to sign-in with empty email field', () => {
+    context('UNABLE to sign-in with empty email field', () => {
         before(() => {
             openRegisterPage()
         });

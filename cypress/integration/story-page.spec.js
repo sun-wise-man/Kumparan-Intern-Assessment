@@ -11,13 +11,12 @@ const loginPage = new LoginPage();
 function openTrendingStory() {
     cy.visit("https://kumparan.com/");
     cy.title()
-            .should('eq',"kumparan.com - Platform Media Berita Kolaboratif, Terkini Indonesia Hari Ini");
+        .should('eq',"kumparan.com - Platform Media Berita Kolaboratif, Terkini Indonesia Hari Ini");
 
-    mainPage.getFirstStoryInTrending()
+    mainPage.getStoryInTrending()
+        .click({force: true})
         .invoke('text')
         .then((headlineTitle) =>{
-            mainPage.getFirstStoryInTrending().click({force: true})
-        
             storyPage.getStoryTitle().should('have.text', headlineTitle);
         })
 }
@@ -31,7 +30,7 @@ describe("Commenting on a story", () => {
         })
     
         it("should type a comment", () => {
-            storyPage.getCommentSection().click({force: true, timeout: 1000});
+            storyPage.getCommentSection().click({force: true});
 
             storyPage.getCommentFieldInput().scrollIntoView().should('be.visible');
 
@@ -69,29 +68,27 @@ describe("Commenting on a story", () => {
         it("should leave a comment", () => {
             storyPage.getCommentSection().click({force: true});
 
-            storyPage.getCommentFieldInput().scrollIntoView().should('be.visible');
-
-            storyPage.getCommenterComment()
-                .should('have.text', typedComment);
-            
-            storyPage.getCommenterName()
-                .should('have.text', Cypress.env('name'));
+            storyPage.getCommentFieldInput()
+                .scrollIntoView()
+                .should('be.visible')
+                .then(() => {
+                    storyPage.getCommenterComment()
+                        .should('have.text', typedComment);
+                    
+                    storyPage.getCommenterName()
+                        .should('have.text', Cypress.env('name'));
+                });
         })
-
     })
 
-    context.only("when NOT logged in", () => {
+    context("when NOT logged in", () => {
         before(() => {
             openTrendingStory();
         })
 
         it('should type a comment',() => {
             storyPage.getCommentSection().click({force: true});
-    
-            storyPage.getCommentFieldInput().scrollIntoView().should('be.visible');
-    
             storyPage.getCommentFieldInput()
-                .click({force: true})
                 .type(typedComment, {force: true})
                 .invoke('text')
                 .then(() => {
@@ -109,14 +106,30 @@ describe("Commenting on a story", () => {
         
         it('should NOT leave a comment', () => {
             cy.go('back');
-            
+
+            storyPage.getStoryTitle().should('have.exist');
             storyPage.getCommentSection().click({force: true});
             
-            storyPage.getCommenterComment()
-                .should('not.have.text', typedComment);
-        
-            storyPage.getCommenterName()
-                .should('not.have.text', Cypress.env('name'));
+            storyPage.getTotalComment()
+                .scrollIntoView()
+                .should('be.visible')
+                .invoke('text')
+                .then((text) => {
+                    if(text == "0 Komentar") {
+                        storyPage.getCommenterComment()
+                            .should('not.have.exist').then(()=>{
+                                storyPage.getCommenterName()
+                                    .should('not.exist');
+                            });
+                    }
+                    else {
+                        storyPage.getCommenterComment()
+                            .should('not.have.text', typedComment).then(()=> {
+                                storyPage.getCommenterName()
+                                    .should('not.have.value',Cypress.env('name'));
+                            });
+                    }
+                })            
         })
     })
 })

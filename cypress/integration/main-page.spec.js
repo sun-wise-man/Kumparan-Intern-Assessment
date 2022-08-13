@@ -14,18 +14,20 @@ describe('Open a news page', () => {
     })
 
     it("should open the first headline news on carousel", () => {
-        mainPage.getFirstStoryInCarousel().invoke('text').then((headlineTitle) => {
-            mainPage.getFirstStoryInCarousel().click({force: true});
-
-            storyPage.getStoryTitle().should('have.text', headlineTitle);
+        mainPage.getStoryInCarousel()
+            .click({force: true})
+            .invoke('text')
+            .then((headlineTitle) => {
+                storyPage.getStoryTitle().should('have.text', headlineTitle);
         })
     })
 
     it("should open the first trending news on trending section", () => {
-        mainPage.getFirstStoryInTrending().invoke('text').then((headlineTitle) =>{
-            mainPage.getFirstStoryInTrending.click({force: true});
-
-            storyPage.getStoryTitle().should('have.text', headlineTitle);
+        mainPage.getStoryInTrending()
+            .click({force: true})
+            .invoke('text')
+            .then((headlineTitle) =>{
+                storyPage.getStoryTitle().should('have.text', headlineTitle);
         })
     })
 

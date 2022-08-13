@@ -1,10 +1,12 @@
 class MainPage {
-    getFirstStoryInCarousel() {
-        return cy.xpath("(//*[@data-qa-id='headline-card']/descendant::span[@data-qa-id='title'])[1]");
+    getStoryInCarousel() {
+        const randomNumber = Math.floor(Math.random() * 3) + 1;
+        return cy.xpath(`(//*[@data-qa-id='headline-card']/descendant::span[@data-qa-id='title'])[${randomNumber}]`);
     }
 
-    getFirstStoryInTrending() {
-        return cy.xpath("(//*[@data-qa-id='trending-story-item']/descendant::span[@data-qa-id='title'])[1]");
+    getStoryInTrending() {
+        const randomNumber = Math.floor(Math.random() * 5) + 1;
+        return cy.xpath(`(//*[@data-qa-id='trending-story-item']/descendant::span[@data-qa-id='title'])[${randomNumber}]`);
     }
 
     getAvatarInNavigationBar() {

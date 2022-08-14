@@ -9,22 +9,26 @@ Repository for Kumparan Academy Intern Assessment
 
 ## Package Used
 - [Cypress.io](https://www.cypress.io/): automation framework
-- [cypress-xpath](https://www.npmjs.com/package/cypress-xpath): cypress' plugin for navigating DOM with xpath
+- [cypress-xpath](https://www.npmjs.com/package/cypress-xpath): cypress' plugin for navigating DOM using xpath
 - [cypress-mochawesome-reporter](https://www.npmjs.com/package/cypress-mochawesome-reporter): package reporter for auto-generating test result and exporting it to HTML
 - [Jabber](https://github.com/dejavu1987/jabber): for generating random word and random email
 
 ## Install and Run Test
-
-- Clone and install dependencies
+**1. Clone and install dependencies**
 ```
 npm install
 ```
 
-- Run test
-```
-npm run test // to run test in CLI
+**2. Run test**
 
-npm run cypress // to run test in GUI
+- Run test in CLI
+```
+npm run test
+```
+
+- Run test in GUI
+```
+npm run cypress
 ```
 
 ## Project Tree

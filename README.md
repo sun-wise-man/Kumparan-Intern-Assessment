@@ -22,7 +22,7 @@ npm install
 ```
 
 **2. Run test**
-> Auto-generated report are only generated when tests are runs in CLI
+> Auto-generated report and videos are only generated and recorded when tests are runs in CLI
 
 - Run test in CLI
 ```

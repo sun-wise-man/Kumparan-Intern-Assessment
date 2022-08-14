@@ -77,7 +77,8 @@ describe('Sign-in', () =>{
 
         it('should show validation error text',() => {
             registerPage.getValidationText()
-                .should('contain','Email sudah terdaftar');
+                .filter(":contains('Email sudah terdaftar')")
+                .should('have.length', 1);
         })
     })
 
@@ -102,7 +103,8 @@ describe('Sign-in', () =>{
 
         it('should show validation error text',() => {
             registerPage.getValidationText()
-                .should('contain','Harus diisi dengan format email');
+                .filter(":contains('Harus diisi dengan format email')")
+                .should('have.length', 1);
         })
     })
 

@@ -86,7 +86,8 @@ describe("Login",() => {
 
         it('should show validation error text',() => {
             loginPage.getValidationText()
-                .should('contain','Email atau Password Salah');
+                .filter(":contains('Email atau Password Salah')")
+                .should('have.length', 2);
         })
     })
     context('UNABLE to login with empty email and password fields',() => {

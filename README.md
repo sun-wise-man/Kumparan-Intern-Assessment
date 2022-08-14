@@ -13,6 +13,20 @@ Repository for Kumparan Academy Intern Assessment
 - [cypress-mochawesome-reporter](https://www.npmjs.com/package/cypress-mochawesome-reporter): package reporter for auto-generating test result and exporting it to HTML
 - [Jabber](https://github.com/dejavu1987/jabber): for generating random word and random email
 
+## Install and Run Test
+
+- Clone and install dependencies
+```
+npm install
+```
+
+- Run test
+```
+npm run test // to run test in CLI
+
+npm run cypress // to run test in GUI
+```
+
 ## Project Tree
 ```
 Kumparan Intern Assessment
